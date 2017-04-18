@@ -1,0 +1,16 @@
+package tutorial;
+
+option java_package = "io.github.jerryofouc.protobuf";
+option java_outer_classname = "SimpleRPC";
+
+message RPCRequest{
+    required uint64 serialNum = 1;
+    required string methodName = 2;
+    required bytes requestParams = 3;
+}
+
+message RPCResponse{
+    required uint64 serialNum = 1;
+    required bytes responseData = 2;
+}
+
