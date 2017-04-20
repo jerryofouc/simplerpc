@@ -21,6 +21,7 @@ public class ServerStub {
     private ServerStub(){
     }
 
+
     public static ServerStub getInstance(){
         if(instance != null){
             return instance;
@@ -33,7 +34,6 @@ public class ServerStub {
         }
         return instance;
     }
-
 
 
     public void setService(Service service) {

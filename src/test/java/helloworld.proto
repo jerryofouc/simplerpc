@@ -1,0 +1,18 @@
+package helloworld;
+
+option java_package = "io.github.jerryofouc.simplerpc.helloworld";
+option java_outer_classname = "HelloWorld";
+
+message HelloWorldRequest{
+    required string ping = 2;
+}
+
+message RPCResponse{
+    required int32 responseCode = 1;
+    required string pong = 2;
+}
+
+
+service HellowroldService{
+    rpc helloworld(RPCResponse) returns (RPCResponse);
+}

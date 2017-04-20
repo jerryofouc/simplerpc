@@ -12,7 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Created by xiaojiez on 4/18/17.
  */
-public class RpcHandler extends SimpleChannelInboundHandler<SimpleRPC.RPCRequest> {
+public class ServerRpcHandler extends SimpleChannelInboundHandler<SimpleRPC.RPCRequest> {
     protected void channelRead0(final ChannelHandlerContext ctx, final SimpleRPC.RPCRequest rpcRequest) throws Exception {
         RpcExecutor.getInstance().executor(new Runnable() {
             public void run() {
