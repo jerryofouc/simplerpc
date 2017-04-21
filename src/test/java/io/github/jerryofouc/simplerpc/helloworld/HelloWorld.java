@@ -1076,11 +1076,11 @@ public final class HelloWorld {
     java.lang.String[] descriptorData = {
       "\n\020helloworld.proto\022\nhelloworld\"!\n\021HelloW" +
       "orldRequest\022\014\n\004ping\030\002 \002(\t\"1\n\013RPCResponse" +
-      "\022\024\n\014responseCode\030\001 \002(\005\022\014\n\004pong\030\002 \002(\t2S\n\021" +
-      "HellowroldService\022>\n\nhelloworld\022\027.hellow" +
-      "orld.RPCResponse\032\027.helloworld.RPCRespons" +
-      "eB7\n)io.github.jerryofouc.simplerpc.hell" +
-      "oworldB\nHelloWorld"
+      "\022\024\n\014responseCode\030\001 \002(\005\022\014\n\004pong\030\002 \002(\t2Y\n\021" +
+      "HellowroldService\022D\n\nhelloworld\022\035.hellow" +
+      "orld.HelloWorldRequest\032\027.helloworld.RPCR" +
+      "esponseB7\n)io.github.jerryofouc.simplerp" +
+      "c.helloworldB\nHelloWorld"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

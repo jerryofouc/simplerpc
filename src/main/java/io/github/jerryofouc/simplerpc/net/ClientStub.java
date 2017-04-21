@@ -30,6 +30,7 @@ public class ClientStub {
     private Map<Long,Lock> lockMap = new HashMap<Long, Lock>();
     private Map<Long,Condition> conditionMap = new HashMap<Long, Condition>();
     private Map<Long,SimpleRPC.RPCResponse> resultMap = new ConcurrentHashMap<Long, SimpleRPC.RPCResponse>();
+    private boolean isStarted = false;
 
     public ClientStub(InetSocketAddress serverAddress) throws InterruptedException {
         this.serverAddress = serverAddress;
@@ -53,6 +54,10 @@ public class ClientStub {
                     // Start the client.
                     ChannelFuture f = b.connect(ClientStub.this.serverAddress).sync();
                     clientChannel = f.channel();
+                    synchronized (ClientStub.this){
+                        isStarted = true;
+                        ClientStub.this.notifyAll();
+                    }
                     // Wait until the connection is closed.
                     f.channel().closeFuture().sync();
                 } catch (InterruptedException e) {
@@ -67,6 +72,11 @@ public class ClientStub {
     }
 
     public SimpleRPC.RPCResponse invoke(String methodName,byte[] params) throws InterruptedException {
+        synchronized (ClientStub.this){
+            while (!isStarted){
+                ClientStub.this.wait();
+            }
+        }
         long cur = serialNum.addAndGet(1);
         clientChannel.writeAndFlush(SimpleRPC.RPCRequest.newBuilder()
                 .setMethodName(methodName).setSerialNum(cur).setRequestParams(ByteString.copyFrom(params)).build());
@@ -77,7 +87,7 @@ public class ClientStub {
         try{
             lock.lock();
             while (resultMap.get(cur) == null){
-                arrivalCondition.wait();
+                arrivalCondition.await();
             }
         }finally {
             lock.unlock();

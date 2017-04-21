@@ -52,7 +52,7 @@ public class ServerStub {
             throw new NullPointerException("service class should be initialize");
         }
         Method method = methodMap.get(rpcRequest.getMethodName());
-        byte[] result = (byte[]) method.invoke(service,rpcRequest.getRequestParams());
+        byte[] result = (byte[]) method.invoke(service,rpcRequest.getRequestParams().toByteArray());
         return SimpleRPC.RPCResponse.newBuilder().
                 setResponseData(ByteString.copyFrom(result))
                 .setSerialNum(rpcRequest.getSerialNum()).build();

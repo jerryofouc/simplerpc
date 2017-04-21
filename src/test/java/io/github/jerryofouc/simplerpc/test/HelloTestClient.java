@@ -12,10 +12,12 @@ import java.net.InetSocketAddress;
  */
 public class HelloTestClient {
     public static void main(String[] args) throws InterruptedException, InvalidProtocolBufferException {
-        ClientStub clientStub = new ClientStub(new InetSocketAddress(18080));
-        SimpleRPC.RPCResponse rpcResponse =
-                clientStub.invoke("helloworld", HelloWorld.HelloWorldRequest.newBuilder().setPing("Ping").build().toByteArray());
-        SimpleRPC.RPCResponse response = SimpleRPC.RPCResponse.parseFrom(rpcResponse.getResponseData());
-        System.out.println(response);
+        ClientStub clientStub = new ClientStub(new InetSocketAddress(10900));
+        for(int i=0;i<10;i++){
+            SimpleRPC.RPCResponse rpcResponse =
+                    clientStub.invoke("helloworld", HelloWorld.HelloWorldRequest.newBuilder().setPing("Ping_"+i).build().toByteArray());
+            System.out.println(rpcResponse);
+        }
+
     }
 }

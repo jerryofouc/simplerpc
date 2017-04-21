@@ -14,5 +14,5 @@ message RPCResponse{
 
 
 service HellowroldService{
-    rpc helloworld(RPCResponse) returns (RPCResponse);
+    rpc helloworld(HelloWorldRequest) returns (RPCResponse);
 }
